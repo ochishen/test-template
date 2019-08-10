@@ -1,3 +1,2 @@
-require('./style.css')
-require('../index.html')
-console.log('success')
+import './style.css'
+import './index.html'

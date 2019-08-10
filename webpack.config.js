@@ -15,12 +15,8 @@ module.exports = {
             {
                 test:/\.(sa|sc|c)ss$/,
                 use:[
-                    {
-                        loader: miniCssExtractPlugin.loader,
-                        options: {
-                          hmr: process.env.NODE_ENV === 'development',
-                        },
-                      },
+                      'css-hot-loader',
+                      miniCssExtractPlugin.loader,
                       'css-loader',
                       {
                         loader: "postcss-loader",
@@ -69,7 +65,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         new htmlWebpackPlugin({
-            template:'./index.html',
+            template:'./src/index.html',
             hash:true
         }),
         new CleanWebpackPlugin()
