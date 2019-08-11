@@ -3,6 +3,7 @@ var miniCssExtractPlugin = require('mini-css-extract-plugin')
 var htmlWebpackPlugin = require('html-webpack-plugin')
 var webpack = require('webpack')
 var path = require('path')
+var devMode = true
 module.exports = {
     entry:'./src/index.js',
     output:{
@@ -15,8 +16,15 @@ module.exports = {
             {
                 test:/\.(sa|sc|c)ss$/,
                 use:[
-                      'css-hot-loader',
-                      miniCssExtractPlugin.loader,
+                    {
+                        loader: miniCssExtractPlugin.loader,
+                        options: {
+                          // only enable hot in development
+                          hmr: devMode == true,
+                          // if hmr does not work, this is a forceful method.
+                          reloadAll: true,
+                        },
+                      },
                       'css-loader',
                       {
                         loader: "postcss-loader",
